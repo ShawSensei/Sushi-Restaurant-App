@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sushi_restaurant_app/components/button.dart';
+import 'package:sushi_restaurant_app/models/food.dart';
 import 'package:sushi_restaurant_app/utils/colors.dart';
+
+import '../components/food_tile.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -11,6 +14,24 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
+  List foodMenu = [
+    Food(
+        name: 'Salmon Sushi',
+        price: '21.00',
+        imagePath: 'lib/images/salmon_sushi.png',
+        rating: '4.9'),
+    Food(
+        name: 'Tuna',
+        price: '23.00',
+        imagePath: 'lib/images/tuna.png',
+        rating: '4.76'),
+    Food(
+        name: 'Salmon Eggs',
+        price: '29.00',
+        imagePath: 'lib/images/salmon_eggs.png',
+        rating: '4.93'),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,9 +67,7 @@ class _MenuPageState extends State<MenuPage> {
                       style: GoogleFonts.dmSerifDisplay(
                           fontSize: 22, color: Colors.white),
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
+                    SizedBox(height: 20),
                     MyButton(
                       text: 'Redeem',
                       onTap: () {},
@@ -62,9 +81,7 @@ class _MenuPageState extends State<MenuPage> {
               ],
             ),
           ),
-          SizedBox(
-            height: 25,
-          ),
+          SizedBox(height: 25),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 25.0),
             child: TextField(
@@ -84,9 +101,7 @@ class _MenuPageState extends State<MenuPage> {
               ),
             ),
           ),
-          SizedBox(
-            height: 25,
-          ),
+          SizedBox(height: 25),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: Text(
@@ -97,9 +112,57 @@ class _MenuPageState extends State<MenuPage> {
                   color: Colors.grey[800]),
             ),
           ),
-          SizedBox(
-            height: 10,
+          SizedBox(height: 10),
+          Expanded(
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: foodMenu.length,
+              itemBuilder: (context, index) => FoodTile(
+                food: foodMenu[index],
+              ),
+            ),
           ),
+          SizedBox(height: 25),
+          Container(
+            decoration: BoxDecoration(
+                color: Colors.grey[100],
+                borderRadius: BorderRadius.circular(20)),
+            margin: EdgeInsets.only(left: 25, right: 25, bottom: 25),
+            padding: EdgeInsets.all(20),
+            child: Row(
+              children: [
+                Image.asset(
+                  'lib/images/futomaki.png',
+                  height: 60,
+                ),
+                SizedBox(width: 20),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Salmon Friends',
+                      style: GoogleFonts.dmSerifDisplay(
+                        fontSize: 18,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      '\$21.00',
+                      style: TextStyle(
+                        color: Colors.grey[700],
+                      ),
+                    ),
+                  ],
+                ),
+                Icon(
+                  Icons.favorite,
+                  color: Colors.pink,
+                  size: 28,
+                )
+              ],
+            ),
+          )
         ],
       ),
     );
