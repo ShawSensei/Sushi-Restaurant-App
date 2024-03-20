@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       home: IntroPage(),
       routes: {
         '/intropage': (context) => const IntroPage(),
-        '/menupage': (context) => const MenuPage()
+        '/menupage': (context) => MenuPage()
       },
     );
   }
