@@ -5,6 +5,7 @@ import 'package:sushi_restaurant_app/models/food.dart';
 import 'package:sushi_restaurant_app/utils/colors.dart';
 
 import '../components/food_tile.dart';
+import 'food_details_page.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -31,6 +32,15 @@ class _MenuPageState extends State<MenuPage> {
         imagePath: 'lib/images/salmon_eggs.png',
         rating: '4.93'),
   ];
+
+  void navigateToFoodDetails(int index) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => FoodDetailsPage(
+                  food: foodMenu[index],
+                )));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -86,19 +96,19 @@ class _MenuPageState extends State<MenuPage> {
             padding: EdgeInsets.symmetric(horizontal: 25.0),
             child: TextField(
               decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                  // Set the radius using BorderRadius.circular()
-                  borderSide:
-                      BorderSide(color: Colors.white), // Set the border color
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                  // Set the radius using BorderRadius.circular()
-                  borderSide:
-                      BorderSide(color: kLightColor), // Set the border color
-                ),
-              ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                    // Set the radius using BorderRadius.circular()
+                    borderSide:
+                        BorderSide(color: Colors.white), // Set the border color
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                    // Set the radius using BorderRadius.circular()
+                    borderSide:
+                        BorderSide(color: kLightColor), // Set the border color
+                  ),
+                  hintText: "Search here /(^-^)*/ "),
             ),
           ),
           SizedBox(height: 25),
@@ -119,6 +129,7 @@ class _MenuPageState extends State<MenuPage> {
               itemCount: foodMenu.length,
               itemBuilder: (context, index) => FoodTile(
                 food: foodMenu[index],
+                onTap: () => navigateToFoodDetails(index),
               ),
             ),
           ),
@@ -130,28 +141,33 @@ class _MenuPageState extends State<MenuPage> {
             margin: EdgeInsets.only(left: 25, right: 25, bottom: 25),
             padding: EdgeInsets.all(20),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Image.asset(
-                  'lib/images/futomaki.png',
-                  height: 60,
-                ),
-                SizedBox(width: 20),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
                   children: [
-                    Text(
-                      'Salmon Friends',
-                      style: GoogleFonts.dmSerifDisplay(
-                        fontSize: 18,
-                      ),
+                    Image.asset(
+                      'lib/images/futomaki.png',
+                      height: 60,
                     ),
-                    SizedBox(height: 10),
-                    Text(
-                      '\$21.00',
-                      style: TextStyle(
-                        color: Colors.grey[700],
-                      ),
+                    SizedBox(width: 20),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Salmon Friends',
+                          style: GoogleFonts.dmSerifDisplay(
+                            fontSize: 18,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          '\$21.00',
+                          style: TextStyle(
+                            color: Colors.grey[700],
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
