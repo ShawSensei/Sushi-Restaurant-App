@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sushi_restaurant_app/models/shop.dart';
+import 'package:sushi_restaurant_app/pages/cart_page.dart';
 import 'package:sushi_restaurant_app/pages/intro_page.dart';
 import 'package:sushi_restaurant_app/pages/menu_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => Shop(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -22,7 +28,8 @@ class MyApp extends StatelessWidget {
       home: IntroPage(),
       routes: {
         '/intropage': (context) => const IntroPage(),
-        '/menupage': (context) => MenuPage()
+        '/menupage': (context) => MenuPage(),
+        '/cartpage': (context) => CartPage(),
       },
     );
   }

@@ -13,6 +13,8 @@ class Assets {
   static const String imagesTuna = 'lib/images/tuna.png';
   static const String libMain = 'lib/main.dart';
   static const String modelsFood = 'lib/models/food.dart';
+  static const String modelsShop = 'lib/models/shop.dart';
+  static const String pagesCartPage = 'lib/pages/cart_page.dart';
   static const String pagesFoodDetailsPage = 'lib/pages/food_details_page.dart';
   static const String pagesIntroPage = 'lib/pages/intro_page.dart';
   static const String pagesMenuPage = 'lib/pages/menu_page.dart';

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:sushi_restaurant_app/components/button.dart';
 import 'package:sushi_restaurant_app/models/food.dart';
 import 'package:sushi_restaurant_app/utils/colors.dart';
 
 import '../components/food_tile.dart';
+import '../models/shop.dart';
 import 'food_details_page.dart';
 
 class MenuPage extends StatefulWidget {
@@ -15,25 +17,10 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
-  List foodMenu = [
-    Food(
-        name: 'Salmon Sushi',
-        price: '21.00',
-        imagePath: 'lib/images/salmon_sushi.png',
-        rating: '4.9'),
-    Food(
-        name: 'Tuna',
-        price: '23.00',
-        imagePath: 'lib/images/tuna.png',
-        rating: '4.76'),
-    Food(
-        name: 'Salmon Eggs',
-        price: '29.00',
-        imagePath: 'lib/images/salmon_eggs.png',
-        rating: '4.93'),
-  ];
-
   void navigateToFoodDetails(int index) {
+    final shop = Provider.of<Shop>(context, listen: false);
+    final foodMenu = shop.foodMenu;
+
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -44,21 +31,28 @@ class _MenuPageState extends State<MenuPage> {
 
   @override
   Widget build(BuildContext context) {
+    final shop = Provider.of<Shop>(context, listen: false);
+    final foodMenu = shop.foodMenu;
     return Scaffold(
       backgroundColor: Colors.grey[300],
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        foregroundColor: Colors.grey[800],
         elevation: 0,
         leading: Icon(Icons.menu),
         title: Center(
           widthFactor: 7.5,
           child: Text(
             'Tokyo',
-            style: TextStyle(
-              color: Colors.grey[900],
-            ),
           ),
         ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/cartpage');
+              },
+              icon: Icon(Icons.shopping_cart_checkout_outlined))
+        ],
       ),
       body: Column(
         children: [
